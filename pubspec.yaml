@@ -1,8 +1,6 @@
 name: awesome_bottom_navigation
-description: A new Flutter package.
+description: Custom bottom navigation bar using flutter.
 version: 0.0.1
-author:
-homepage:
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -13,6 +11,7 @@ dependencies:
     sdk: flutter
   vector_math: ^2.0.8
 
+repository: https://github.com/akashom53/awesome_bottom_navigation_package
 
 dev_dependencies:
   flutter_test:
