@@ -2,7 +2,7 @@
 
 Custom bottom navigation bar using flutter. UI inspiration from [Dribble](https://dribbble.com/shots/6005981-Tab-Bar-Animation-nr-2).
 
-![Preview](https://giphy.com/gifs/bDaJZ80hHPRyJsBGfB/html5)
+![Preview](https://media.giphy.com/media/bDaJZ80hHPRyJsBGfB/giphy.gif)
 
 ## Getting Started
 
