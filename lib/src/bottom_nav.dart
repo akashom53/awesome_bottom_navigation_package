@@ -1,14 +1,59 @@
-
-
 import 'package:flutter/material.dart';
 import 'clipper.dart';
 import 'consts.dart';
 import 'shadow_painter.dart';
 
+/// A Bottom Navigation Bar that comes with beautiful animation stylish curves.
+///
+/// The design is inspired from a [dribble post](https://dribbble.com/shots/6005981-Tab-Bar-Animation-nr-2)
+/// {@tool snippet}
+///
+/// This is a basic usage in a Scaffold
+/// ```dart
+/// Scaffold(
+///   body: Container(
+///     color: _bgColor,
+///     child: Center(
+///       child: Text("Selected Page: $selectedIndex"),
+///     ),
+///   ),
+///   bottomNavigationBar: AwesomeBottomNav(
+///     icons: [
+///       Icons.home_outlined,
+///       Icons.shopping_cart_outlined,
+///       Icons.category_outlined,
+///       Icons.account_circle_outlined,
+///       // Icons.settings_outlined,
+///     ],
+///     highlightedIcons: [
+///       Icons.home,
+///       Icons.shopping_cart,
+///       Icons.category,
+///       Icons.account_circle,
+///       // Icons.settings,
+///     ],
+///     onTapped: (int value) {
+///       setState(() {
+///         selectedIndex = value;
+///       });
+///     },
+///     bodyBgColor: _bgColor,
+///     highlightColor: Color(0xFFFF9944),
+///     navFgColor: Colors.grey.withOpacity(0.5),
+///     navBgColor: Colors.white,
+///   ),
+/// );
+/// ```
 class AwesomeBottomNav extends StatefulWidget {
+  /// List of icons of type [IconData] to be shown in the bottom navigation in unselected state.
   final List<IconData> icons;
+
+  /// List of icons of type [IconData] to be shown in the bottom navigation in selected state.
   final List<IconData> highlightedIcons;
+
+  /// Color of highlight
   final Color highlightColor;
+
   final Color bodyBgColor;
   final Color navBgColor;
   final Color navFgColor;
@@ -105,7 +150,7 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
                 1));
   }
 
-  Widget buildCircle(Size _size) {
+  Widget _buildCircle(Size _size) {
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) => Positioned(
@@ -130,7 +175,7 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
     );
   }
 
-  Widget buildBar(BuildContext context) {
+  Widget _buildBar(BuildContext context) {
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) => CustomPaint(
@@ -192,8 +237,8 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          buildCircle(_size),
-          buildBar(context),
+          _buildCircle(_size),
+          _buildBar(context),
         ],
       ),
     );
