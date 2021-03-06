@@ -1,6 +1,6 @@
 name: awesome_bottom_navigation
-description: Custom bottom navigation bar using flutter.
-version: 0.0.1
+description: A beautiful animated bottom navigation bar built using flutter. The package uses mathematics to draw curves which results in fast and lightweight animations.
+version: 0.0.2
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
