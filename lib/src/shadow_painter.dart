@@ -23,21 +23,23 @@ class BottomNavShadowPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-
     var path = Path();
     path.moveTo(0, 0);
     final sectionWidth = (size.width - paddingW) / numberOfTabs;
     final curveControlOffset = sectionWidth * 0.5;
 
     final topPadding = topPaddingFactor * size.height;
-    path.lineTo((animatedIndex * sectionWidth + paddingW/2) - curveControlOffset, 0);
+    path.lineTo(
+        (animatedIndex * sectionWidth + paddingW / 2) - curveControlOffset, 0);
 
-    final firstControlPoint = Offset((animatedIndex * sectionWidth + paddingW/2), 0);
+    final firstControlPoint =
+        Offset((animatedIndex * sectionWidth + paddingW / 2), 0);
 
     final secondControlPoint =
-    Offset((animatedIndex * sectionWidth + paddingW/2), notchHeight);
+        Offset((animatedIndex * sectionWidth + paddingW / 2), notchHeight);
     final secondEndPoint = Offset(
-        (animatedIndex * sectionWidth + paddingW/2) + curveControlOffset, notchHeight);
+        (animatedIndex * sectionWidth + paddingW / 2) + curveControlOffset,
+        notchHeight);
 
     path.cubicTo(
         firstControlPoint.dx,
@@ -47,15 +49,19 @@ class BottomNavShadowPainter extends CustomPainter {
         secondEndPoint.dx,
         secondEndPoint.dy);
 
-    path.lineTo(((animatedIndex + 1) * sectionWidth + paddingW/2) - curveControlOffset,
+    path.lineTo(
+        ((animatedIndex + 1) * sectionWidth + paddingW / 2) -
+            curveControlOffset,
         notchHeight);
-    final thirdControlPoint =
-    Offset(((animatedIndex + 1) * sectionWidth + paddingW/2), notchHeight);
+    final thirdControlPoint = Offset(
+        ((animatedIndex + 1) * sectionWidth + paddingW / 2), notchHeight);
 
     final fourthControlPoint =
-    Offset(((animatedIndex + 1) * sectionWidth + paddingW/2), 0);
-    final fourthEndPoint =
-    Offset(((animatedIndex + 1) * sectionWidth + paddingW/2) + curveControlOffset, 0);
+        Offset(((animatedIndex + 1) * sectionWidth + paddingW / 2), 0);
+    final fourthEndPoint = Offset(
+        ((animatedIndex + 1) * sectionWidth + paddingW / 2) +
+            curveControlOffset,
+        0);
 
     path.cubicTo(
         thirdControlPoint.dx,
@@ -67,8 +73,7 @@ class BottomNavShadowPainter extends CustomPainter {
     path.lineTo(size.width, 0);
 
     path = path.transform(
-        Matrix4.translation(vector.Vector3(0, topPadding, 0)).storage
-    );
+        Matrix4.translation(vector.Vector3(0, topPadding, 0)).storage);
 
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);

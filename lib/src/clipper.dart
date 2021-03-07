@@ -2,7 +2,6 @@ import 'consts.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart';
 
-
 class BottomNavClipper extends CustomClipper<Path> {
   final int numberOfTabs;
   final double notchHeight = kNavSize - 8;
@@ -30,14 +29,17 @@ class BottomNavClipper extends CustomClipper<Path> {
     final curveControlOffset = sectionWidth * 0.5;
 
     final topPadding = topPaddingFactor * size.height;
-    path.lineTo((animatedIndex * sectionWidth + paddingW/2) - curveControlOffset, 0);
+    path.lineTo(
+        (animatedIndex * sectionWidth + paddingW / 2) - curveControlOffset, 0);
 
-    final firstControlPoint = Offset((animatedIndex * sectionWidth + paddingW/2), 0);
+    final firstControlPoint =
+        Offset((animatedIndex * sectionWidth + paddingW / 2), 0);
 
     final secondControlPoint =
-    Offset((animatedIndex * sectionWidth + paddingW/2), notchHeight);
+        Offset((animatedIndex * sectionWidth + paddingW / 2), notchHeight);
     final secondEndPoint = Offset(
-        (animatedIndex * sectionWidth + paddingW/2) + curveControlOffset, notchHeight);
+        (animatedIndex * sectionWidth + paddingW / 2) + curveControlOffset,
+        notchHeight);
 
     path.cubicTo(
         firstControlPoint.dx,
@@ -47,15 +49,19 @@ class BottomNavClipper extends CustomClipper<Path> {
         secondEndPoint.dx,
         secondEndPoint.dy);
 
-    path.lineTo(((animatedIndex + 1) * sectionWidth + paddingW/2) - curveControlOffset,
+    path.lineTo(
+        ((animatedIndex + 1) * sectionWidth + paddingW / 2) -
+            curveControlOffset,
         notchHeight);
-    final thirdControlPoint =
-    Offset(((animatedIndex + 1) * sectionWidth + paddingW/2), notchHeight);
+    final thirdControlPoint = Offset(
+        ((animatedIndex + 1) * sectionWidth + paddingW / 2), notchHeight);
 
     final fourthControlPoint =
-    Offset(((animatedIndex + 1) * sectionWidth + paddingW/2), 0);
-    final fourthEndPoint =
-    Offset(((animatedIndex + 1) * sectionWidth + paddingW/2) + curveControlOffset, 0);
+        Offset(((animatedIndex + 1) * sectionWidth + paddingW / 2), 0);
+    final fourthEndPoint = Offset(
+        ((animatedIndex + 1) * sectionWidth + paddingW / 2) +
+            curveControlOffset,
+        0);
 
     path.cubicTo(
         thirdControlPoint.dx,
@@ -66,9 +72,8 @@ class BottomNavClipper extends CustomClipper<Path> {
         fourthEndPoint.dy);
     path.lineTo(size.width, 0);
 
-    path = path.transform(
-        Matrix4.translation(Vector3(0, topPadding, 0)).storage
-    );
+    path =
+        path.transform(Matrix4.translation(Vector3(0, topPadding, 0)).storage);
 
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
