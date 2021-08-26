@@ -9,12 +9,12 @@ class BottomNavClipper extends CustomClipper<Path> {
   final BuildContext context;
 
   final double animatedIndex;
-  double paddingW;
+  late double paddingW;
 
   BottomNavClipper({
-    @required this.numberOfTabs,
-    @required this.animatedIndex,
-    @required this.context,
+    required this.numberOfTabs,
+    required this.animatedIndex,
+    required this.context,
   }) {
     final size = MediaQuery.of(context).size;
     final totalPadding = size.width - (kNavSize * numberOfTabs);

@@ -1,1 +1,1 @@
-const num kNavSize = 56.0;
+const double kNavSize = 56.0;

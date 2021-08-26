@@ -60,14 +60,14 @@ class AwesomeBottomNav extends StatefulWidget {
   final ValueSetter<int> onTapped;
 
   const AwesomeBottomNav({
-    Key key,
-    @required this.icons,
-    @required this.highlightedIcons,
-    @required this.highlightColor,
-    @required this.onTapped,
-    @required this.bodyBgColor,
-    @required this.navBgColor,
-    @required this.navFgColor,
+    Key? key,
+    required this.icons,
+    required this.highlightedIcons,
+    required this.highlightColor,
+    required this.onTapped,
+    required this.bodyBgColor,
+    required this.navBgColor,
+    required this.navFgColor,
   }) : super(key: key);
 
   @override
@@ -77,10 +77,10 @@ class AwesomeBottomNav extends StatefulWidget {
 class _AwesomeBottomNavState extends State<AwesomeBottomNav>
     with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
-  AnimationController _animationController;
-  Animation<double> _posXAnimation;
-  Animation<double> _sinkAnimation;
-  Animation<double> _riseAnimation;
+  late AnimationController _animationController;
+  late Animation<double> _posXAnimation;
+  late Animation<double> _sinkAnimation;
+  late Animation<double> _riseAnimation;
 
   @override
   void initState() {
