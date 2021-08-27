@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'clipper.dart';
 import 'consts.dart';
 import 'shadow_painter.dart';
+import 'custom_extension.dart';
 
 /// A Bottom Navigation Bar that comes with beautiful animation stylish curves.
 ///
@@ -46,10 +47,14 @@ import 'shadow_painter.dart';
 /// ```
 class AwesomeBottomNav extends StatefulWidget {
   /// List of icons of type [IconData] to be shown in the bottom navigation in unselected state.
-  final List<IconData> icons;
+  // final List<IconData> icons;
 
   /// List of icons of type [IconData] to be shown in the bottom navigation in selected state.
-  final List<IconData> highlightedIcons;
+  final List<Widget> highlightedIcons;
+
+  // final List<String> iconText;
+
+  final List<Widget> menuItems;
 
   /// Color of highlight
   final Color highlightColor;
@@ -61,13 +66,15 @@ class AwesomeBottomNav extends StatefulWidget {
 
   const AwesomeBottomNav({
     Key? key,
-    required this.icons,
+    // required this.icons,
     required this.highlightedIcons,
+    required this.menuItems,
     required this.highlightColor,
     required this.onTapped,
     required this.bodyBgColor,
     required this.navBgColor,
     required this.navFgColor,
+    // required this.iconText,
   }) : super(key: key);
 
   @override
@@ -97,12 +104,12 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
       ),
     );
     _sinkAnimation =
-        Tween(begin: -20.0, end: kNavSize.toDouble()).animate(CurvedAnimation(
+        Tween(begin: -40.0, end: kNavSize.toDouble()).animate(CurvedAnimation(
       parent: _animationController,
       curve: Interval(0.0, 0.25, curve: Curves.easeInOutSine),
     ));
     _riseAnimation =
-        Tween(end: -20.0, begin: kNavSize.toDouble()).animate(CurvedAnimation(
+        Tween(end: -40.0, begin: kNavSize.toDouble()).animate(CurvedAnimation(
       parent: _animationController,
       curve: Interval(0.75, 1.0, curve: Curves.easeInOutSine),
     ));
@@ -126,7 +133,7 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
 
   double _getMainCircleTop() {
     if (!_animationController.isAnimating) {
-      return -20;
+      return -40;
     }
 
     if (_animationController.value < 0.5) {
@@ -137,8 +144,8 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
   }
 
   double _getMainCircleLeft(Size size) {
-    final totalPadding = size.width - (kNavSize * widget.icons.length);
-    final singlePadding = totalPadding / (widget.icons.length + 1);
+    final totalPadding = size.width - (kNavSize * widget.highlightedIcons.length);
+    final singlePadding = totalPadding / (widget.highlightedIcons.length + 1);
     return ((_animationController.isAnimating
                 ? _posXAnimation.value
                 : _selectedIndex) *
@@ -164,11 +171,7 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
             clipBehavior: Clip.antiAlias,
             type: MaterialType.circle,
             elevation: 2,
-            child: Icon(
-              widget.highlightedIcons[_selectedIndex],
-              color: Colors.white,
-              size: 30,
-            ),
+            child: widget.highlightedIcons[_selectedIndex],
           ),
         ),
       ),
@@ -184,7 +187,7 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
           animatedIndex: _animationController.isAnimating
               ? _posXAnimation.value
               : _selectedIndex * 1.0,
-          numberOfTabs: widget.icons.length,
+          numberOfTabs: widget.highlightedIcons.length,
         ),
         child: ClipPath(
           clipBehavior: Clip.antiAlias,
@@ -193,7 +196,7 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
             animatedIndex: _animationController.isAnimating
                 ? _posXAnimation.value
                 : _selectedIndex * 1.0,
-            numberOfTabs: widget.icons.length,
+            numberOfTabs: widget.highlightedIcons.length,
           ),
           child: Container(
             height: kNavSize + MediaQuery.of(context).padding.bottom,
@@ -202,25 +205,18 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: widget.icons
-                    .map<Widget>((icon) => InkWell(
-                          borderRadius: BorderRadius.circular(kNavSize),
-                          onTap: () {
-                            _tapped(widget.icons.indexOf(icon));
-                          },
-                          child: Container(
-                            height: 64,
-                            width: 56,
-                            child: Center(
-                              child: Icon(
-                                icon,
-                                size: 30,
-                                color: widget.navFgColor,
-                              ),
-                            ),
-                          ),
-                        ))
-                    .toList(),
+                children: widget.menuItems.mapIndexed((e, i) => GestureDetector(
+                  onTap: () {
+                    _tapped(widget.menuItems.indexOf(widget.menuItems[i]));
+                  },
+                  child: Container(
+                    height: 64,
+                    width: 56,
+                    child: Center(
+                      child: widget.menuItems[i],
+                    ),
+                  ),
+                )).toList(),
               ),
             ),
           ),

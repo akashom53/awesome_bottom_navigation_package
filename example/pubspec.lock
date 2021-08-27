@@ -11,10 +11,10 @@ packages:
   awesome_bottom_navigation:
     dependency: "direct main"
     description:
-      name: awesome_bottom_navigation
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.4"
+      path: ".."
+      relative: true
+    source: path
+    version: "0.0.5"
   boolean_selector:
     dependency: transitive
     description:
@@ -158,4 +158,3 @@ packages:
     version: "2.1.0"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.17.0"

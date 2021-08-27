@@ -38,20 +38,8 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
         ),
       ),
       bottomNavigationBar: AwesomeBottomNav(
-        icons: [
-          Icons.home_outlined,
-          Icons.shopping_cart_outlined,
-          Icons.category_outlined,
-          Icons.account_circle_outlined,
-          // Icons.settings_outlined,
-        ],
-        highlightedIcons: [
-          Icons.home,
-          Icons.shopping_cart,
-          Icons.category,
-          Icons.account_circle,
-          // Icons.settings,
-        ],
+        menuItems: _getMenuItems(),
+        highlightedIcons: _getHighlightedIcons(),
         onTapped: (int value) {
           setState(() {
             selectedIndex = value;
@@ -62,6 +50,41 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
         navFgColor: Colors.grey.withOpacity(0.5),
         navBgColor: Colors.white,
       ),
+    );
+  }
+
+  List<Widget> _getHighlightedIcons() {
+    final List<Icon> _items = List<Icon>.empty(growable: true);
+    _items.add(Icon(Icons.home,));
+    _items.add(Icon(Icons.shopping_cart,));
+    _items.add(Icon(Icons.category,));
+    _items.add(Icon(Icons.account_circle,));
+    return _items;
+  }
+
+  List<Widget> _getMenuItems() {
+    final List<Widget> items = List<Widget>.empty(growable: true);
+    items.add(_getMenu(Icons.home_outlined, "Home"));
+    items.add(_getMenu(Icons.shopping_cart_outlined, "Cart"));
+    items.add(_getMenu(Icons.category_outlined, "Help"));
+    items.add(_getMenu(Icons.account_circle_outlined, "Profile"));
+    return items;
+  }
+
+  Widget _getMenu(final IconData icon, final String text) {
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+        ),
+        Text(
+          text,
+          style: TextStyle(color: Colors.black),
+        )
+      ],
     );
   }
 }
