@@ -46,7 +46,21 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
           });
         },
         bodyBgColor: _bgColor,
-        highlightColor: Color(0xFFFF9944),
+        // highlightColor: Color(0xFFFF9944),
+        boxDecoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xff0464EF),
+                Color(0xE40464EF),
+                Color(0xff51F5EA),
+              ],
+              stops: [
+                0, 0.5, 1
+              ]
+          ),
+        ),
         navFgColor: Colors.grey.withOpacity(0.5),
         navBgColor: Colors.white,
       ),

@@ -57,7 +57,8 @@ class AwesomeBottomNav extends StatefulWidget {
   final List<Widget> menuItems;
 
   /// Color of highlight
-  final Color highlightColor;
+  final Color? highlightColor;
+  final BoxDecoration? boxDecoration;
 
   final Color bodyBgColor;
   final Color navBgColor;
@@ -69,11 +70,12 @@ class AwesomeBottomNav extends StatefulWidget {
     // required this.icons,
     required this.highlightedIcons,
     required this.menuItems,
-    required this.highlightColor,
+    this.highlightColor,
     required this.onTapped,
     required this.bodyBgColor,
     required this.navBgColor,
     required this.navFgColor,
+    this.boxDecoration,
     // required this.iconText,
   }) : super(key: key);
 
@@ -166,12 +168,15 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
         child: SizedBox(
           height: kNavSize,
           width: kNavSize,
-          child: Material(
-            color: widget.highlightColor,
-            clipBehavior: Clip.antiAlias,
-            type: MaterialType.circle,
-            elevation: 2,
-            child: widget.highlightedIcons[_selectedIndex],
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(kNavSize),
+            child: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration: widget.boxDecoration,
+              // type: MaterialType.circle,
+              // elevation: 2,
+              child: widget.highlightedIcons[_selectedIndex],
+            ),
           ),
         ),
       ),
@@ -203,17 +208,18 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
             child: Material(
               color: widget.navBgColor,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: widget.menuItems.mapIndexed((e, i) => GestureDetector(
-                  onTap: () {
-                    _tapped(widget.menuItems.indexOf(widget.menuItems[i]));
-                  },
-                  child: Container(
-                    height: 64,
-                    width: 56,
-                    child: Center(
-                      child: widget.menuItems[i],
+                children: widget.menuItems.mapIndexed((e, i) => Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      _tapped(widget.menuItems.indexOf(widget.menuItems[i]));
+                    },
+                    child: Container(
+                      height: 64,
+                      child: Center(
+                        child: widget.menuItems[i],
+                      ),
                     ),
                   ),
                 )).toList(),
@@ -233,8 +239,8 @@ class _AwesomeBottomNavState extends State<AwesomeBottomNav>
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          _buildCircle(_size),
           _buildBar(context),
+          _buildCircle(_size),
         ],
       ),
     );
