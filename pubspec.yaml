@@ -1,17 +1,17 @@
 name: awesome_bottom_navigation
 description: A beautiful animated bottom navigation bar built using flutter. The package uses mathematics to draw curves which results in fast and lightweight animations.
-version: 0.0.4
+version: 0.0.5
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  vector_math: ^2.0.8
+  vector_math: ^2.1.0
 
-repository: https://github.com/akashom53/awesome_bottom_navigation_package
+#repository: https://github.com/akashom53/awesome_bottom_navigation_package
 
 dev_dependencies:
   flutter_test:

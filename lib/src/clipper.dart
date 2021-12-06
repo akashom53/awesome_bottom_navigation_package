@@ -4,17 +4,17 @@ import 'package:vector_math/vector_math_64.dart';
 
 class BottomNavClipper extends CustomClipper<Path> {
   final int numberOfTabs;
-  final double notchHeight = kNavSize - 8;
+  final double notchHeight = kNavSize - 28;
   final topPaddingFactor = 0.0;
   final BuildContext context;
 
   final double animatedIndex;
-  double paddingW;
+  late double paddingW;
 
   BottomNavClipper({
-    @required this.numberOfTabs,
-    @required this.animatedIndex,
-    @required this.context,
+    required this.numberOfTabs,
+    required this.animatedIndex,
+    required this.context,
   }) {
     final size = MediaQuery.of(context).size;
     final totalPadding = size.width - (kNavSize * numberOfTabs);
@@ -26,7 +26,7 @@ class BottomNavClipper extends CustomClipper<Path> {
     var path = Path();
     path.moveTo(0, 0);
     final sectionWidth = (size.width - paddingW) / numberOfTabs;
-    final curveControlOffset = sectionWidth * 0.5;
+    final curveControlOffset = sectionWidth * 0.4;
 
     final topPadding = topPaddingFactor * size.height;
     path.lineTo(
